@@ -2,22 +2,21 @@
 
 require_once("vendor/autoload.php");
 
-$app = new \Slim\Slim(); // chamando nova aplicação do slim
+use \Slim\Slim; // name spaces
+use \Hcode\Page; // name spaces
+
+$app = new Slim(); // chamando nova aplicação do slim, slim serve pra carregar rotas
 
 $app->config('debug', true);
 
 $app->get('/', function() {
     
-	//echo "OK";
+	$page = new Page(); // namespace (Hcode\DB)
 
-	$sql = new Hcode\DB\Sql(); // namespace (Hcode\DB)
-
-	$results = $sql->select("SELECT * FROM tb_users");
-
-	echo json_encode($results);
+	$page->setTpl("index");
 
 });
 
-$app->run();
+$app->run(); // faz tudo isso rodar
 
  ?>
