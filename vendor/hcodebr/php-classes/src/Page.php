@@ -7,12 +7,16 @@ use Rain\Tpl;
 class Page {
 
 	private $tpl; // classe privada para outras classe não ter acesso
-	private $optiosn = []; // array vazio
+	private $options = []; // array vazio
 	private $defaults = [
+		"header"=>true,
+		"footer"=>true,
 		"data"=>[]
 	];
 
-	public function __construct($opts = array(), $tpl_dir = "/views"){ // parametro $opt por padrão será um array
+	public function __construct($opts = array(), $tpl_dir = "/views/"){ // parametro $opt por padrão será um array
+
+		$this->defaults["data"]["session"] = $_SESSION;
 
 		$this->options = array_merge($this->defaults, $opts); // merge faz uma mesclagem ou união de arrays
 
@@ -28,7 +32,7 @@ class Page {
 
 		$this->setData($this->options["data"]);
 
-		$this->tpl->draw("header"); // desenhar o template na tela, cabeçalho
+		if ($this->options["header"] === true) $this->tpl->draw("header"); // desenhar o template na tela, cabeçalho
 	}
 
 	private function setData($data = array())
@@ -51,7 +55,7 @@ class Page {
 
 	public function __destruct(){
 
-		$this->tpl->draw("footer"); // rodape onde eu posso colocar o javascript e outras informações
+		if ($this->options["footer"] === true) $this->tpl->draw("footer"); // rodape onde eu posso colocar o javascript e outras informações
 
 	}
 }

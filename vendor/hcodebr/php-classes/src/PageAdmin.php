@@ -10,6 +10,7 @@ class PageAdmin extends Page { // herda as heranças da Classe Page page.php
 		parent::__construct($opts, $tpl_dir); // chama metodo construtor da classe pai Page
 
 	}
+	
 }
 
 
