@@ -4,6 +4,7 @@ require_once("vendor/autoload.php");
 
 use \Slim\Slim; // name spaces
 use \Hcode\Page; // name spaces
+use \Hcode\PageAdmin; // name spaces
 
 $app = new Slim(); // chamando nova aplicação do slim, slim serve pra carregar rotas
 
@@ -16,6 +17,15 @@ $app->get('/', function() {
 	$page->setTpl("index");
 
 });
+
+$app->get('/admin', function() {
+    
+	$page = new PageAdmin(); // namespace (Hcode\DB)
+
+	$page->setTpl("index");
+
+});
+
 
 $app->run(); // faz tudo isso rodar
 
